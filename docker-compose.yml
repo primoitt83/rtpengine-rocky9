@@ -8,6 +8,11 @@ services:
       dockerfile: ./Dockerfile
     restart: always
     privileged: true
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 30000
+        hard: 50000
     ports:
       - 2223:2223 ## listen-ng
       - 2230:2230 ## listen-tcp
