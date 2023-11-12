@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  rtpengine:
+    container_name: rtpengine
+    build:
+      context: ./build
+      dockerfile: ./Dockerfile
+    restart: always
+    privileged: true
+    ports:
+      - 2223:2223 ## listen-ng
+      - 2230:2230 ## listen-tcp
+      - 2225:2225 ## listen-http
+      - 2231:2231 ## listen-cli
+      - 12200-12300:12200-12300/udp ## listen-udp=12222, check port_min and port_max bellow
+    environment:
+      - IPINTERNO=172.25.0.8 ## container ip
+      - IPEXTERNO=192.168.50.42 ## local ip
+      - PORT_MIN=10000
+      - PORT_MAX=20000
+    networks:
+      net:
+        ipv4_address: 172.25.0.8
+    logging:
+      options:
+        max-size: 100M
+
+networks:
+  net:
+    external: true
