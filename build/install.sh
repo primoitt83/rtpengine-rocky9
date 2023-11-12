@@ -1,8 +1,5 @@
 #!/bin/sh
 
-## disable interactive functions
-ENV DEBIAN_FRONTEND noninteractive
-
 dnf update -y
 dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 
